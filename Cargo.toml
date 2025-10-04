@@ -1,0 +1,8 @@
+[package]
+name = "jp-web-novel-editor"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+leptos = { version = "0.8.10", features = ["csr"] }
+reactive_stores = "0.2.5"
