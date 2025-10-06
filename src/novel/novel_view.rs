@@ -8,14 +8,12 @@ use reactive_stores::Store;
 use crate::novel::{NovelText, NovelTextStoreFields};
 
 #[component]
-pub fn NovelView() -> impl IntoView {
-    let novel_text = expect_context::<Store<NovelText>>();
-
+pub fn NovelView(novel_text: ReadSignal<String>) -> impl IntoView {
     let parser = Parser::default();
     view! {
         <div class="novel-view" >
             <div class="test-view-area">
-            {move || render_phrases(&parser,novel_text.text().get().as_str())}
+            {move || render_phrases(&parser,&novel_text.get())}
             </div>
         </div>
     }

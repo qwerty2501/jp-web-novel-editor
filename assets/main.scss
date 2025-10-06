@@ -9,27 +9,27 @@ body {
   display: flex;
 }
 
-.novel-input {
-  width: 50%;
-  height: 100%;
+.novel-editor {
+  .novel-input {
+    width: 50%;
+    height: 100%;
 
-  .text-area {
-    margin-left: 3px;
-    width: calc(100% - 13px);
-    height: calc(100% - 5px);
+    .text-area {
+      margin-left: 3px;
+      width: calc(100% - 13px);
+      height: calc(100% - 5px);
 
-  }
-}
-
-
-.novel-view {
-  width: 50%;
-  height: 100%;
-
-  .test-view-area {
-    margin: 0;
-    padding: 0;
-    content-visibility: auto;
+    }
   }
 
+  .novel-view {
+    width: 50%;
+    height: 100%;
+
+    .test-view-area {
+      margin: 0;
+      padding: 0;
+      content-visibility: auto;
+    }
+  }
 }
