@@ -22,9 +22,12 @@ body {
     .text-area {
       margin-left: 3px;
       width: calc(100% - 13px);
-      height: calc(100% - 5px);
+      height: 100%;
       font-size: inherit;
       overflow-y: scroll;
+      border-style: solid;
+      border-color: gray;
+      border-width: thin;
     }
   }
 
