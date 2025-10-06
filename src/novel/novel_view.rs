@@ -3,9 +3,6 @@ use jp_web_novel_text::{
     WhiteSpacePhrase, WhiteSpaceType,
 };
 use leptos::prelude::*;
-use reactive_stores::Store;
-
-use crate::novel::{NovelText, NovelTextStoreFields};
 
 #[component]
 pub fn NovelView(novel_text: ReadSignal<String>) -> impl IntoView {

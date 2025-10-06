@@ -1,9 +1,6 @@
 use std::time::Duration;
 
 use leptos::prelude::*;
-use reactive_stores::Store;
-
-use crate::novel::{NovelText, NovelTextStoreFields};
 
 #[component]
 pub fn NovelInput(novel_text_set: WriteSignal<String>) -> impl IntoView {

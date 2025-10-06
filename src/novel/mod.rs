@@ -5,12 +5,6 @@ use novel_input::*;
 use novel_view::*;
 
 use leptos::prelude::*;
-use reactive_stores::Store;
-
-#[derive(Clone, Debug, Default, Store)]
-pub struct NovelText {
-    text: String,
-}
 
 #[component]
 pub fn NovelEditor() -> impl IntoView {
