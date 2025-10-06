@@ -14,14 +14,15 @@ pub fn NovelInput() -> impl IntoView {
         <div class="novel-input">
             <textarea  id="novel-text-area" class="text-area"
                 on:input:target = move |ev|{
-                    if ev.target().value().len() < 3000{
-                        *novel_text.text().write() = ev.target().value();
+                    let current_text = ev.target().value();
+                    if current_text.len() < 3000{
+                        *novel_text.text().write() = current_text;
                     } else{
-                        let current_hash:md5::Digest = md5::compute(ev.target().value());
+                        let current_hash:md5::Digest = md5::compute(current_text.as_bytes());
                         *before_text_md5_set.write() = current_hash;
                         set_timeout(move ||{
                             if before_text_md5.get() == current_hash{
-                                *novel_text.text().write() = ev.target().value();
+                                *novel_text.text().write() = current_text;
                             }
                         }, Duration::from_secs(1));
                     }
