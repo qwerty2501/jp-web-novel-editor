@@ -236,6 +236,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "crawdad"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9742b11612a5e342c05ae62386a7a486c8fcf60bf835914a469d44c545c3b7fe"
+
+[[package]]
 name = "crossbeam-utils"
 version = "0.8.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -263,6 +269,28 @@ dependencies = [
  "lock_api",
  "once_cell",
  "parking_lot_core",
+]
+
+[[package]]
+name = "derive-getters"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "74ef43543e701c01ad77d3a5922755c6a1d71b22d942cb8042be4994b380caff"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "derive-new"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2cdc8d50f426189eef89dac62fabfa0abb27d5cc008f25bf4156a0203325becc"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
@@ -715,8 +743,25 @@ checksum = "4a5f13b858c8d314ee3e8f639011f7ccefe71f97f96e50151fb991f267928e2c"
 name = "jp-web-novel-editor"
 version = "0.1.0"
 dependencies = [
+ "jp-web-novel-text",
  "leptos",
+ "md5",
  "reactive_stores",
+ "web-sys",
+]
+
+[[package]]
+name = "jp-web-novel-text"
+version = "0.1.0"
+source = "git+https://github.com/qwerty2501/jp-web-novel-text.git?branch=main#ed5ba1fabd3bf006c9ff60cc433bd5e0dba0a91c"
+dependencies = [
+ "crawdad",
+ "derive-getters",
+ "derive-new",
+ "kanji",
+ "nom",
+ "serde",
+ "thiserror 2.0.17",
 ]
 
 [[package]]
@@ -728,6 +773,12 @@ dependencies = [
  "once_cell",
  "wasm-bindgen",
 ]
+
+[[package]]
+name = "kanji"
+version = "2.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "582446620c9a363d1f011b392acfd64ecda983b63866ae38a8d6086e5ef820b3"
 
 [[package]]
 name = "leptos"
@@ -915,6 +966,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "md5"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ae960838283323069879657ca3de837e9f7bbb4c7bf6ea7f1b290d5e9476d2e0"
+
+[[package]]
 name = "memchr"
 version = "2.7.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -925,6 +982,15 @@ name = "next_tuple"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "60993920e071b0c9b66f14e2b32740a4e27ffc82854dcd72035887f336a09a28"
+
+[[package]]
+name = "nom"
+version = "8.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "df9761775871bdef83bee530e60050f7e54b1105350d6884eb0fb4f46c2f9405"
+dependencies = [
+ "memchr",
+]
 
 [[package]]
 name = "num_cpus"

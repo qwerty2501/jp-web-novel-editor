@@ -6,3 +6,6 @@ edition = "2024"
 [dependencies]
 leptos = { version = "0.8.10", features = ["csr"] }
 reactive_stores = "0.2.5"
+web-sys = "0.3.81"
+jp-web-novel-text = { git = "https://github.com/qwerty2501/jp-web-novel-text.git", branch = "main" }
+md5 = "0.8.0"
