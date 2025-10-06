@@ -9,7 +9,7 @@ pub fn NovelView(novel_text: ReadSignal<String>) -> impl IntoView {
     let parser = Parser::default();
     view! {
         <div class="novel-view" >
-            <div class="test-view-area">
+            <div class="text-view-area">
             {move || render_phrases(&parser,&novel_text.get())}
             </div>
         </div>

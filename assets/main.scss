@@ -24,7 +24,7 @@ body {
       width: calc(100% - 13px);
       height: calc(100% - 5px);
       font-size: inherit;
-
+      overflow-y: scroll;
     }
   }
 
@@ -32,7 +32,7 @@ body {
     width: 50%;
     height: 100%;
 
-    .test-view-area {
+    .text-view-area {
       margin: 0;
       padding: 0;
       content-visibility: auto;
