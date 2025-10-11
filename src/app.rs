@@ -1,3 +1,4 @@
+use crate::menu::*;
 use crate::novel::*;
 use leptos::prelude::*;
 
@@ -5,6 +6,7 @@ use leptos::prelude::*;
 pub fn App() -> impl IntoView {
     view! {
         <div class="app">
+            <Menu />
             <NovelEditor />
         </div>
     }

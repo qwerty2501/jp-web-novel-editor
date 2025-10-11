@@ -7,7 +7,99 @@ body {
 .app {
   width: 100vw;
   height: 100vh;
+  display: flex;
 }
+
+.menu {
+  position: relative;
+
+  .menu-icon {
+    width: 40px;
+    height: 30px;
+    position: fixed;
+    top: 5px;
+    left: 5px;
+    cursor: pointer;
+    z-index: 3;
+    display: inline-block;
+  }
+
+  .menu-icon span {
+    display: block;
+    height: 4px;
+    margin: 6px 0;
+    background: #333;
+    border-radius: 2px;
+    transition: 0.4s;
+  }
+
+  #menu-toggle:checked+.menu-icon span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+  }
+
+  #menu-toggle:checked+.menu-icon span:nth-child(2) {
+    opacity: 0;
+  }
+
+  #menu-toggle:checked+.menu-icon span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+  }
+
+  #menu-toggle:checked~.overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .overlay {
+    //position: fixed;
+    //inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s;
+    //z-index: 1;
+  }
+
+  .nav {
+    //position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: #fff;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+    transition: left 0.4s ease;
+    //z-index: 2;
+  }
+
+  #menu-toggle:checked~.nav {
+    left: 0;
+  }
+
+  .nav ul {
+    list-style: none;
+    padding: 60px 20px;
+  }
+
+  .nav li {
+    margin: 20px 0;
+  }
+
+  .nav a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+  }
+
+  .nav a:hover {
+    color: #007bff;
+  }
+
+}
+
+
+
 
 .novel-editor {
   width: 100%;

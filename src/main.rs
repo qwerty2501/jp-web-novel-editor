@@ -1,4 +1,5 @@
 mod app;
+mod menu;
 mod novel;
 
 fn main() {
