@@ -8,9 +8,6 @@ title = "jp-web-novel-editor"
 # include `assets` in web platform
 [web.resource]
 
-# Additional CSS style files
-style = ["/assets/main.scss"]
-
 # Additional JavaScript files
 script = []
 
