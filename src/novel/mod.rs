@@ -4,16 +4,15 @@ mod novel_view;
 use novel_input::*;
 use novel_view::*;
 
-use leptos::prelude::*;
+use dioxus::prelude::*;
 
 #[component]
-pub fn NovelEditor() -> impl IntoView {
-    let (novel_text, novel_text_set) = signal(String::new());
-    view! {
-        <div class="novel-editor" >
-            <NovelInput novel_text_set=novel_text_set />
-            <NovelView  novel_text=novel_text/>
-        </div>
-
+pub fn NovelEditor() -> Element {
+    rsx! {
+        div{
+            class:"novel-editor",
+            NovelInput{},
+            NovelView{},
+        }
     }
 }

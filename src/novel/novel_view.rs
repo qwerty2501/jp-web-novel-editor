@@ -1,70 +1,81 @@
+use dioxus::prelude::*;
 use jp_web_novel_text::{
     DictionaryPhrase, DictionaryWord, NewLinePhrase, Parser, Phrase, PlainPhrase, RubyPhrase,
     WhiteSpacePhrase, WhiteSpaceType,
 };
-use leptos::prelude::*;
 
 #[component]
-pub fn NovelView(novel_text: ReadSignal<String>) -> impl IntoView {
+pub fn NovelView(/*novel_text: ReadSignal<String>*/) -> Element {
     let parser = Parser::default();
-    view! {
-        <div class="novel-view" >
-            <div class="text-view-area">
-            {move || render_phrases(&parser,&novel_text.get())}
-            </div>
-        </div>
+    rsx! {
+        div{
+            class:"novel-view",
+            div{
+                class:"text-view-area",
+                {render_phrases(&parser,"")},
+            }
+
+        }
     }
 }
 
-pub fn render_phrases(parser: &Parser, input: &str) -> impl IntoView + use<> {
-    parser
-        .parse_iter(input)
-        .map(|frag| match frag.phrase() {
-            Phrase::Plain(phrase) => render_plain(phrase).into_any(),
-            Phrase::Ruby(phrase) => render_ruby(phrase).into_any(),
-            Phrase::NewLine(phrase) => render_new_line(phrase).into_any(),
-            Phrase::WhiteSpace(phrase) => render_white_space(phrase).into_any(),
-            Phrase::DictionaryWord(phrase) => render_dictionary_word(phrase).into_any(),
-        })
-        .collect_view()
-}
-
-fn render_plain(phrase: &PlainPhrase<&str>) -> impl IntoView {
-    view! {
-        <span>{phrase.target().to_string()}</span>
+pub fn render_phrases(parser: &Parser, input: &str) -> Element {
+    rsx! {
+        for frag in parser.parse_iter(input){
+            {
+                match frag.phrase() {
+                    Phrase::Plain(phrase) => render_plain(phrase),
+                    Phrase::Ruby(phrase) => render_ruby(phrase),
+                    Phrase::NewLine(phrase) => render_new_line(phrase),
+                    Phrase::WhiteSpace(phrase) => render_white_space(phrase),
+                    Phrase::DictionaryWord(phrase) => render_dictionary_word(phrase),
+                }
+            }
+        }
     }
 }
 
-fn render_ruby(phrase: &RubyPhrase<&str>) -> impl IntoView {
-    view! {
-        <ruby>{phrase.target().to_string()}<rp>{"("}</rp><rt>{phrase.ruby().to_string()}</rt><rp>{")"}</rp></ruby>
+fn render_plain(phrase: &PlainPhrase<&str>) -> Element {
+    rsx! {
+        span{
+            {phrase.target()}
+        }
     }
 }
 
-fn render_new_line(_: &NewLinePhrase) -> impl IntoView {
-    view! {
-        <br/>
+fn render_ruby(phrase: &RubyPhrase<&str>) -> Element {
+    rsx! {
+        ruby{
+            {phrase.target()},
+            rp{"("},
+            rt{
+                {phrase.ruby()}
+            },
+            rp{")"},
+        }
     }
 }
 
-fn render_white_space(phrase: &WhiteSpacePhrase) -> impl IntoView {
-    view! {
-        <span style=
-        {
-           "margin-left:".to_string() + &( match phrase.white_space_type(){
+fn render_new_line(_: &NewLinePhrase) -> Element {
+    rsx! {
+        br{}
+    }
+}
+
+fn render_white_space(phrase: &WhiteSpacePhrase) -> Element {
+    rsx! {
+        span{
+            style:{"margin-left:".to_string() + &( match phrase.white_space_type(){
                 WhiteSpaceType::Space => 1,
                 WhiteSpaceType::ZenkakuSpace => 2,
                 WhiteSpaceType::Tab => 4,
             } * phrase.count() * 10
-           ).to_string() + "px"
+           ).to_string() + "px"},
+
         }
-        >
-        </span>
     }
 }
 
-fn render_dictionary_word(phrase: &DictionaryPhrase<&str, &DictionaryWord>) -> impl IntoView {
-    view! {
-        <ruby>{phrase.target().to_string()}<rp>{"("}</rp><rt>{""}</rt><rp>{")"}</rp></ruby>
-    }
+fn render_dictionary_word(phrase: &DictionaryPhrase<&str, &DictionaryWord>) -> Element {
+    unimplemented!()
 }

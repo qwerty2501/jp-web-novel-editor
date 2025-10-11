@@ -1,13 +1,13 @@
-use crate::menu::*;
+//use crate::menu::*;
 use crate::novel::*;
-use leptos::prelude::*;
+use dioxus::prelude::*;
 
 #[component]
-pub fn App() -> impl IntoView {
-    view! {
-        <div class="app">
-            <Menu />
-            <NovelEditor />
-        </div>
+pub fn App() -> Element {
+    rsx! {
+        div{
+            class:"app",
+            NovelEditor{}
+        }
     }
 }

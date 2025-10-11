@@ -1,14 +1,22 @@
 use std::time::Duration;
 
-use leptos::prelude::*;
-use wasm_bindgen::JsCast;
-use web_sys::HtmlDivElement;
+use dioxus::prelude::*;
 
 #[component]
-pub fn NovelInput(novel_text_set: WriteSignal<String>) -> impl IntoView {
-    let (before_text_len, before_text_len_set) = signal(0);
+pub fn NovelInput(/*novel_text_set: WriteSignal<String>*/) -> Element {
+    //let (before_text_len, before_text_len_set) = signal(0);
 
-    view! {
+    rsx! {
+        div{
+            class:"novel-input",
+            div{
+                contenteditable:true,
+                id:"novel-text-area",
+                class:"text-area",
+
+            }
+        }
+        /*
         <div class="novel-input">
             <div  contenteditable id="novel-text-area" class="text-area"
                 on:input:target = move |ev|{
@@ -28,5 +36,6 @@ pub fn NovelInput(novel_text_set: WriteSignal<String>) -> impl IntoView {
                 }
         ></div>
         </div>
+        */
     }
 }

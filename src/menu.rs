@@ -1,7 +1,9 @@
-use leptos::prelude::*;
+use dioxus::prelude::*;
 
 #[component]
-pub fn Menu() -> impl IntoView {
+pub fn Menu() -> Element {
+    unimplemented!()
+    /*
     view! {
         <div class="menu">
             <input type="checkbox" checked=true id="menu-toggle" hidden / >
@@ -23,4 +25,5 @@ pub fn Menu() -> impl IntoView {
         </div>
 
     }
+    */
 }
