@@ -29,7 +29,7 @@ pub fn NovelInput(mut props: NovelInputProps) -> Element {
 
                         let current_text = element.inner_text();
                         if current_text.len() < 3000{
-                            *props.novel_text_set.write() = current_text;
+                            props.novel_text_set.set(current_text);
                         } else{
                             *before_text_len.write() = current_text.len();
                             let timeout = Timeout::new(1000, move ||{
@@ -39,7 +39,6 @@ pub fn NovelInput(mut props: NovelInputProps) -> Element {
                             });
                             timeout.forget();
                         }
-
                     }
                 },
             }
