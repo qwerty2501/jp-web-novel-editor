@@ -4,17 +4,21 @@ use jp_web_novel_text::{
     WhiteSpacePhrase, WhiteSpaceType,
 };
 
+#[derive(PartialEq, Clone, Props)]
+pub struct NovelInputProps {
+    novel_text_set: Signal<String>,
+}
+
 #[component]
-pub fn NovelView(/*novel_text: ReadSignal<String>*/) -> Element {
+pub fn NovelView(novel_text: Signal<String>) -> Element {
     let parser = Parser::default();
     rsx! {
         div{
             class:"novel-view",
             div{
                 class:"text-view-area",
-                {render_phrases(&parser,"")},
+                {render_phrases(&parser,&novel_text.read())},
             }
-
         }
     }
 }

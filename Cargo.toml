@@ -8,7 +8,10 @@ edition = "2021"
 
 [dependencies]
 dioxus = { version = "0.6.0", features = [] }
+gloo-timers = "0.3.0"
 jp-web-novel-text = { git = "https://github.com/qwerty2501/jp-web-novel-text.git", branch = "main" }
+wasm-bindgen = "0.2.104"
+web-sys = "0.3.81"
 
 [features]
 default = ["web"]

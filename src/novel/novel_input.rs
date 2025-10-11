@@ -1,10 +1,16 @@
-use std::time::Duration;
-
-use dioxus::prelude::*;
+use dioxus::{prelude::*, web::WebEventExt};
+use gloo_timers::callback::Timeout;
+use wasm_bindgen::JsCast;
+use web_sys::HtmlElement;
+#[derive(PartialEq, Clone, Props)]
+pub struct NovelInputProps {
+    novel_text_set: Signal<String>,
+}
 
 #[component]
-pub fn NovelInput(/*novel_text_set: WriteSignal<String>*/) -> Element {
-    //let (before_text_len, before_text_len_set) = signal(0);
+pub fn NovelInput(mut props: NovelInputProps) -> Element {
+    let mut text_area = use_signal(|| None);
+    let mut before_text_len = use_signal(|| 0);
 
     rsx! {
         div{
@@ -13,29 +19,30 @@ pub fn NovelInput(/*novel_text_set: WriteSignal<String>*/) -> Element {
                 contenteditable:true,
                 id:"novel-text-area",
                 class:"text-area",
+                onmounted: move |element|{
+                    text_area.set(Some(element));
+                },
+                oninput: move |_| {
+                    if let Some(text_area) = text_area.cloned(){
+                        let element = text_area.as_web_event();
+                        let element = element.dyn_into::<HtmlElement>().unwrap();
 
+                        let current_text = element.inner_text();
+                        if current_text.len() < 3000{
+                            *props.novel_text_set.write() = current_text;
+                        } else{
+                            *before_text_len.write() = current_text.len();
+                            let timeout = Timeout::new(1000, move ||{
+                                if *before_text_len.read() == current_text.len() {
+                                    props.novel_text_set.set(current_text);
+                                }
+                            });
+                            timeout.forget();
+                        }
+
+                    }
+                },
             }
         }
-        /*
-        <div class="novel-input">
-            <div  contenteditable id="novel-text-area" class="text-area"
-                on:input:target = move |ev|{
-                    if let Ok(div) = ev.target().dyn_into::<HtmlDivElement>() {
-                        let current_text = div.inner_text();
-                        if current_text.len() < 3000{
-                            *novel_text_set.write() = current_text;
-                        } else{
-                            *before_text_len_set.write() = current_text.len();
-                            set_timeout(move ||{
-                                if before_text_len.get() == current_text.len(){
-                                    *novel_text_set.write() = current_text;
-                                }
-                            }, Duration::from_secs(1));
-                        }
-                    }
-                }
-        ></div>
-        </div>
-        */
     }
 }

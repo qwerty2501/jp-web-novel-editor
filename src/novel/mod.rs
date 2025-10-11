@@ -8,11 +8,16 @@ use dioxus::prelude::*;
 
 #[component]
 pub fn NovelEditor() -> Element {
+    let novel_text = use_signal(|| String::new());
     rsx! {
         div{
             class:"novel-editor",
-            NovelInput{},
-            NovelView{},
+            NovelInput{
+                novel_text_set:novel_text,
+            },
+            NovelView{
+                novel_text:novel_text,
+            },
         }
     }
 }
